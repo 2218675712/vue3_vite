@@ -2,7 +2,11 @@
   <div>
     <div>我是父元素</div>
     我有一个名字叫做{{ data.name }} 我年龄是{{ data.age }}
-    <child-1 :name="data.name" :age="data.age"></child-1>
+    <child-1
+      :name="data.name"
+      :age="data.age"
+      @ChildTOFather="ChildTOFather"
+    ></child-1>
   </div>
 </template>
 
@@ -18,8 +22,12 @@ export default defineComponent({
       name: "小明",
       age: 18,
     });
+    function ChildTOFather(data: any) {
+      console.log(data.msg);
+    }
     return {
       data,
+      ChildTOFather,
     };
   },
 });

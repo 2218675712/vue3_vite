@@ -7,27 +7,31 @@
       :age="data.age"
       @ChildTOFather="ChildTOFather"
     ></child-1>
+    <child-2 :msg="child1Data"></child-2>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from "vue";
+import { defineComponent, reactive, ref } from "vue";
 import Child1 from "./Child1.vue";
+import Child2 from "./Child2.vue";
 
 export default defineComponent({
-  components: { Child1 },
+  components: { Child1, Child2 },
   name: "Father",
   setup() {
     let data = reactive({
       name: "小明",
       age: 18,
     });
+    let child1Data = ref("");
     function ChildTOFather(data: any) {
-      console.log(data.msg);
+      child1Data.value = data.msg;
     }
     return {
       data,
       ChildTOFather,
+      child1Data,
     };
   },
 });

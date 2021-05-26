@@ -25,9 +25,9 @@ export default defineComponent({
       age: 18,
     });
     let child1Data = ref("");
-    function ChildTOFather(data: any) {
+    const ChildTOFather = (data: any) => {
       child1Data.value = data.msg;
-    }
+    };
     return {
       data,
       ChildTOFather,

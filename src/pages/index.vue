@@ -6,6 +6,9 @@
     <div>
       <router-link to="/ComponentsTransfer">ComponentsTransfer</router-link>
     </div>
+    <div>
+      <router-link to="/vuexTest">vuexTest</router-link>
+    </div>
   </div>
 </template>
 

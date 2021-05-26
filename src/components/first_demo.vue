@@ -12,7 +12,15 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, ref, toRefs } from "vue";
+import {
+  ComponentInternalInstance,
+  defineComponent,
+  getCurrentInstance,
+  onMounted,
+  reactive,
+  ref,
+  toRefs,
+} from "vue";
 
 export default defineComponent({
   name: "first_demo",
@@ -30,7 +38,25 @@ export default defineComponent({
     const books = reactive({ title: "Vue实战", author: "尤玉溪" });
     // toRefs()方法的作用是把对象转成响应式的数据,可以用来解构
     const booksData = toRefs(books);
-    // TODO 使用Axios发送数据
+    // 通过 ctx 属性获得当前上下文
+    // 直接强制确认
+    const {ctx} = getCurrentInstance()!;
+    // 2.使用as强转
+    // const {ctx} = getCurrentInstance() as ComponentInternalInstance;
+
+    const Login = () => {
+      ctx.$http.post('https://www.fastmock.site/mock/2f875ab9c10f3100cc72125a9bf0945a/vue3_vite/login', {
+        username: 'admin',
+        password: '123456'
+      }).then((res: LoginRes) => {
+        // typescript自定义类型,会有类型提示
+        console.log(res)
+      })
+    };
+
+    onMounted(() => {
+      Login()
+    });
     return {
       num,
       changeNum,
